@@ -360,25 +360,25 @@
         </div>
         <div class="row justify-content-center mt-3">
           <div class="col-md-7">
-            <div class="alert alert-success alert-dismissible fade show d-none" role="alert">
-              <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+            <div class="alert alert-success alert-dismissible fade show d-none" role="alert" id="my-alert">
+              <strong>Berhasil!</strong> Pesan anda telah terkirim.
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-            <form>
+            <form name="ragil-contact-form">
               <div class="mb-3">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" />
+                <label for="name" class="form-label">Nama</label>
+                <input type="text" class="form-control" id="name" name="nama" />
               </div>
               <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" />
+                <input type="email" class="form-control" id="email" name="email" />
               </div>
               <div class="mb-3">
-                <label for="message" class="form-label">Message</label>
-                <textarea class="form-control" id="message" rows="3"></textarea>
+                <label for="message" class="form-label">Pesan</label>
+                <textarea class="form-control" id="message" rows="3" name="pesan"></textarea>
               </div>
-              <button type="submit" class="btn btn-primary">Send</button>
-              <button class="btn btn-primary d-none" type="button" disabled>
+              <button type="submit" class="btn btn-primary" id="btn-kirim">Send</button>
+              <button class="btn btn-primary d-none" type="button" id="btn-loading" disabled>
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                 Loading...
               </button>
@@ -401,5 +401,31 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+
+    <script>
+      const scriptURL = "https://script.google.com/macros/s/AKfycbxH-Qc1dYC2Qq2YSorl1IjetmXgpOQTSOZdzAfOKh70ESAEaniYz8hV0GXDtRcEnvTD/exec";
+      const form = document.forms["ragil-contact-form"];
+      const btnKirim = document.getElementById("btn-kirim");
+      const btnLoading = document.getElementById("btn-loading");
+      const myAlert = document.getElementById("my-alert");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        btnLoading.classList.toggle("d-none");
+        btnKirim.classList.toggle("d-none");
+        fetch(scriptURL, { method: "POST", body: new FormData(form) })
+          .then((response) => {
+            //tampilkan Loading dan hilangkan tombol kirim
+            btnLoading.classList.toggle("d-none");
+            btnKirim.classList.toggle("d-none");
+            //tampilkan alert
+            myAlert.classList.toggle("d-none");
+            //reset form
+            form.reset();
+            console.log("Success!", response);
+          })
+          .catch((error) => console.error("Error!", error.message));
+      });
+    </script>
   </body>
 </html>
