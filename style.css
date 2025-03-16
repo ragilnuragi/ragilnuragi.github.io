@@ -6,6 +6,16 @@ body {
 }
 
 .dark {
-  background-color: rgba(20, 17, 17, 0.853);
+  background-color: rgba(20, 17, 17, 0.804);
   color: white;
+}
+
+.dark .sosmed {
+  color: white;
+  border-color: white;
+}
+
+.dark .sosmed:hover {
+  background-color: white;
+  color: black !important;
 }
