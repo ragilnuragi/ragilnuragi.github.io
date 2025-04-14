@@ -1,3 +1,12 @@
+*,
+html,
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
 html {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -18,4 +27,20 @@ body {
 .dark .sosmed:hover {
   background-color: white;
   color: black !important;
+}
+
+.parallax {
+  width: 100%;
+  height: 100vh;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+.intro {
+  background-image: url("img/parallax.jpg");
+}
+
+.btn-resume:hover {
+  animation: bounce;
+  animation-duration: 2s;
 }
